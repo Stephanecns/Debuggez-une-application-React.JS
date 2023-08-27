@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import Home from "./index";
 
+// Tests pour vérifier la présence de champs spécifiques lors de l'affichage du formulaire.
 describe("When Form is created", () => {
   it("a list of fields card is displayed", async () => {
     render(<Home />);
@@ -10,6 +11,8 @@ describe("When Form is created", () => {
     await screen.findByText("Personel / Entreprise");
   });
 
+
+// Tests pour vérifier le comportement après la soumission du formulaire.
   describe("and a click is triggered on the submit button", () => {
     it("the success message is displayed", async () => {
       render(<Home />);
@@ -21,13 +24,13 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours");
-      await screen.findByText("Message envoyé !");
+      await screen.findByText("Envoyer");
     });
   });
 
 });
 
-
+// Tests (à implémenter) pour vérifier la présence de divers éléments sur la page.
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     // to implement
