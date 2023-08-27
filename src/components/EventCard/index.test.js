@@ -1,7 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import EventCard from "./index";
 
+//Définition du test global
 describe("When a event card is created", () => {
+
+  //Test de l'image avec sa valeur alt
   it("an image is display with alt value", () => {
     render(<EventCard imageSrc="http://src-image" imageAlt="image-alt-text" date={new Date("2022-04-01")} 
     title="test event"
@@ -12,6 +15,8 @@ describe("When a event card is created", () => {
     expect(imageElement).toBeInTheDocument();
     expect(imageElement.alt).toEqual("image-alt-text");
   });
+
+  //Test du titre, de l'étiquette et du mois
   it("a title, a label and a month are displayed", () => {
     render(
       <EventCard
@@ -29,6 +34,8 @@ describe("When a event card is created", () => {
     expect(labelElement).toBeInTheDocument();
     expect(monthElement).toBeInTheDocument();
   });
+  
+  //Test de la propriété small
   describe("with small props", () => {
     it("a modifier small is added", () => {
       render(
@@ -44,5 +51,7 @@ describe("When a event card is created", () => {
       const cardElement = screen.getByTestId("card-testid");
       expect(cardElement.className.includes("EventCard--small")).toEqual(true);
     });
+    
   });
+
 });
