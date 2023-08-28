@@ -12,16 +12,15 @@ const Slider = () => {
    // Récupération des données depuis le contexte global
   const [index, setIndex] = useState(0);
 
-    // Triage des événements par date en ordre décroissant
-  const byDateDesc = data?.focus.sort((evtA, evtB) =>
-    new Date(evtA.date) > new Date(evtB.date) ? -1 : 1
-  );
+// Crée une copie du tableau 'data.focus' pour éviter de modifier le tableau original.
+    const byDateDesc = [...(data?.focus || [])].sort((evtA, evtB) => new Date(evtA.date) <  new Date(evtB.date));
+
 
    // Fonction pour avancer au slide suivant ou revenir au premier
   const nextCard = () => {
     setTimeout(
       () => setIndex(index < byDateDesc.length ? index + 1 : 0),
-      5000
+      1000
     );
   };
 
