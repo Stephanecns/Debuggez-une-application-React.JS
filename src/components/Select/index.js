@@ -13,11 +13,16 @@ const Select = ({
   label,
   type = "normal",
 }) => {
+    // État de la valeur sélectionnée
   const [value, setValue] = useState();
+    // État pour savoir si le menu est ouvert ou fermé
   const [collapsed, setCollapsed] = useState(true);
   const changeValue = (newValue) => {
-    onChange();
+    // Informe le composant parent de la nouvelle valeur
+    onChange(newValue);
+    // Met à jour la valeur dans ce composant
     setValue(newValue);
+    // Ferme le menu déroulant
     setCollapsed(newValue);
   };
   return (
@@ -90,8 +95,10 @@ Select.propTypes = {
   type: PropTypes.string,
 }
 
+// sorte de "filet de sécurité" qui permet au composant de fonctionner même quand certaines informations n'ont pas été fournies.
 Select.defaultProps = {
-  onChange: () => null,
+  // Fonction par défaut pour onChange, ne fait rien et retourne la valeur entrante
+  onChange: (newValue) => newValue,
   titleEmpty: false,
   label: "",
   type: "normal",
