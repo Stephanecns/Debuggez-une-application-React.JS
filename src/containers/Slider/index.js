@@ -8,24 +8,21 @@ import "./style.scss";
 const Slider = () => {
   // Récupération des données du contexte
   const { data } = useData();
-
   // État pour suivre l'index du slide actuellement affiché
   const [index, setIndex] = useState(0);
-
   // Crée une copie du tableau 'data.focus' pour éviter de modifier le tableau original
-  const byDateDesc = [...(data?.focus || [])].sort(
+  const byDateDesc = data?.focus.sort(
     (evtA, evtB) => new Date(evtA.date) < new Date(evtB.date)
   );
+  const changeIndex = () => {
+    setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
+  };
 
   // Fonction pour avancer au slide suivant ou revenir au premier
   // Ajuste la condition pour éviter un dépassement d'index.
   // Les indices commencent à 0, donc nous comparons à 'byDateDesc.length - 1' au lieu de 'byDateDesc.length'.
-
   const nextCard = () => {
-    setTimeout(
-      () => setIndex(index < byDateDesc.length - 1 ? index + 1 : 0),
-      5000
-    );
+    setTimeout(() => changeIndex(), 5000);
   };
 
   // Cycle automatiquement à travers les slides
@@ -70,9 +67,9 @@ const Slider = () => {
                     key={uniqueKey}
                     type="radio"
                     name="radio-button"
-                    // Remplacement de idx par index 
+                    // Remplacement de idx par index
                     // Ajustement du bouton radio 'checked'. Utilisez 'index' pour refléter le slide actuellement visible.
-                    // contrairement à idx, index permet d'avoir un état constant qui s'adapte au changement d'état 
+                    // contrairement à idx, index permet d'avoir un état constant qui s'adapte au changement d'état
                     checked={index === radioIdx}
                     readOnly
                   />
