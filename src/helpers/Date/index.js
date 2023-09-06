@@ -12,5 +12,5 @@ export const MONTHS = {
   11: "novembre",
   12: "décembre",
 };
-
+// +1 sert à ajuster l'index du mois de à 1-12 pour correspondre aux clés de l'objet MONTHS.
 export const getMonth = (date) => MONTHS[date.getMonth() + 1];

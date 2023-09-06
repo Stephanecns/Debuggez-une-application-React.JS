@@ -11,25 +11,23 @@ const Slider = () => {
   // État pour suivre l'index du slide actuellement affiché
   const [index, setIndex] = useState(0);
   // Crée une copie du tableau 'data.focus' pour éviter de modifier le tableau original
-  const byDateDesc = data?.focus.sort(
+  const byDateDesc = (data?.focus || []).sort(
     (evtA, evtB) => new Date(evtA.date) < new Date(evtB.date)
   );
   const changeIndex = () => {
+    // une fois que index atteint 2,(grace à byDateDesc.length - 1) il sera réinitialisé à 0.
     setIndex(index < byDateDesc.length - 1 ? index + 1 : 0);
   };
-
   // Fonction pour avancer au slide suivant ou revenir au premier
   // Ajuste la condition pour éviter un dépassement d'index.
   // Les indices commencent à 0, donc nous comparons à 'byDateDesc.length - 1' au lieu de 'byDateDesc.length'.
   const nextCard = () => {
     setTimeout(() => changeIndex(), 5000);
   };
-
   // Cycle automatiquement à travers les slides
   useEffect(() => {
     nextCard();
   }, [index]);
-
   // Rendu du slider avec ses slides et la pagination
   return (
     <div className="SlideCardList">
@@ -53,14 +51,7 @@ const Slider = () => {
             <div className="SlideCard__pagination">
               {byDateDesc.map((_, radioIdx) => {
                 // Création d'une clé unique pour chaque input de type radio
-                // Cette clé combine l'ID de l'événement et l'index du radio
-                // L'utilisation de l'underscore `_` indique que nous n'utilisons pas activement
-                // l'élément actuel du tableau dans le corps de cette fonction.
-                // En revanche, nous sommes intéressés par le second argument, `radioIdx`,
-                // qui nous donne l'index actuel de l'élément dans le tableau.
                 const uniqueKey = `${event.id}-radio-${radioIdx}`;
-
-                // Rendu de l'input radio pour la pagination
                 // La radio est cochée si son index correspond à l'index du slide actuellement affiché
                 return (
                   <input

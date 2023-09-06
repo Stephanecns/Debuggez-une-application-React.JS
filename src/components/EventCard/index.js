@@ -14,6 +14,7 @@ const EventCard = ({
 }) => (
     <div
       data-testid="card-testid"
+      // Si la prop small est true, la classe EventCard--small est ajoutée à l'élément, sinon elle n'est pas ajoutée. 
       className={`EventCard${small ? " EventCard--small" : ""}`}
       {...props}
     >

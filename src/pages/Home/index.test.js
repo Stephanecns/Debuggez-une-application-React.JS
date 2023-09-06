@@ -11,7 +11,7 @@ describe("When Form is created", () => {
     await screen.findByText("Personel / Entreprise");
   });
 
-
+  
 // Tests pour vérifier le comportement après la soumission du formulaire.
   describe("and a click is triggered on the submit button", () => {
     it("the success message is displayed", async () => {
@@ -24,13 +24,13 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours");
-      await screen.findByText("Envoyer");
+      await screen.findByText("Message envoyé !");
     });
   });
 
 });
 
-// Tests (à implémenter) pour vérifier la présence de divers éléments sur la page.
+
 describe("When a page is created", () => {
   it("a list of events is displayed", () => {
     // to implement
