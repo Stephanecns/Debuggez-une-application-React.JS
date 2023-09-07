@@ -24,7 +24,7 @@ describe("When Form is created", () => {
         })
       );
       await screen.findByText("En cours");
-      // j'ai utilisé la méthode waitFor pour attendre que le texte "Message envoyé !" apparaisse dans le document.
+      // j'ai utilisé waitFor pour attendre que le message apparaisse dans le DOM
       await waitFor(() => {
         expect(screen.getByText("Message envoyé !")).toBeInTheDocument();
       });
