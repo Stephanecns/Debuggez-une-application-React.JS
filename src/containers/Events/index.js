@@ -30,7 +30,7 @@ const EventList = () => {
       (currentPage - 1) * PER_PAGE <= index &&
       PER_PAGE * currentPage > index
     ) {
-      // Ajouter un filtre sur les type d'événement
+      // Ajouter un filtre sur les type d'événement et vérifie si une catégorie a été sélectionnée
       return type === undefined || event.type === type || type === null;
     }
     return false;
