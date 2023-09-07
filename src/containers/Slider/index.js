@@ -29,10 +29,13 @@ const Slider = () => {
     nextCard();
   }, [index]);
   // Rendu du slider avec ses slides et la pagination
+  
   return (
+    
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        <div key={event.id}>
+        //Utilisation de JSON.stringify pour générer une clé unique à partir de l'objet 'event'
+        <div key={JSON.stringify(event)}>
           <div
             className={`SlideCard SlideCard--${
               index === idx ? "display" : "hide"

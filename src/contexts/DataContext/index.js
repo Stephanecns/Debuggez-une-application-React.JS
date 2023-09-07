@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useMemo  // Importez useMemo
 } from "react";
 
 const DataContext = createContext({});
@@ -21,6 +22,7 @@ export const DataProvider = ({ children }) => {
   const [data, setData] = useState(null);
   //  Initialise last avec null
   const [last, setLast] = useState(null);
+  
   const getData = useCallback(async () => {
     try {
       setData(await api.loadData());
@@ -28,29 +30,26 @@ export const DataProvider = ({ children }) => {
       setError(err);
     }
   }, []);
+  
   useEffect(() => {
-    if (data) {
-      setLast(
-        // Trie les événements par date et met à jour last avec l'événement le plus récent.
-        data.events.sort((evtA, evtB) =>
-          new Date(evtA.date) < new Date(evtB.date) ? -1 : 1
-        )[0]
+    if (data && data.events) { // Vérifie que data et data.events existent
+      setLast(data.events.sort((evtA, evtB) =>
+          new Date(evtA.date) < new Date(evtB.date) ? -1 : 1)[0]
       );
       return;
     }
     getData();
-  });
+  }, [data]);
+  
 
+  const value = useMemo(() => ({
+    data,
+    error,
+    last,
+  }), [data, error, last]);  // Utilisez useMemo pour mémoriser l'objet
+  
   return (
-    <DataContext.Provider
-      // eslint-disable-next-line react/jsx-no-constructed-context-values
-      //Ajout de last
-      value={{
-        data,
-        error,
-        last,
-      }}
-    >
+    <DataContext.Provider value={value}>
       {children}
     </DataContext.Provider>
   );
