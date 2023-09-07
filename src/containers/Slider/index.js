@@ -34,7 +34,7 @@ const Slider = () => {
     
     <div className="SlideCardList">
       {byDateDesc?.map((event, idx) => (
-        //Utilisation de JSON.stringify pour générer une clé unique à partir de l'objet 'event'
+        // Utilisation de JSON.stringify pour générer une clé unique à partir de l'objet 'event'
         <div key={JSON.stringify(event)}>
           <div
             className={`SlideCard SlideCard--${
